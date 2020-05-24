@@ -4,7 +4,7 @@ Logger para a saída padrão, geralmente a tela do console ou terminal.
 
 
 class Stdout:
-    def __init__(self, name='unamed_logger', **templates):
+    def __init__(self, name='unamed_logger'):
         self._name = name
 
     def get_name(self):

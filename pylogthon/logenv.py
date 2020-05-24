@@ -1,9 +1,19 @@
-'''
-Este módulo fornece um gerenciador para o ambiente de log.
-'''
+""" Este módulo fornece um gerenciador para o ambiente de log.
+"""
+
 class LogEnv:
     def __init__(self):
-        self._level_assign = {}
+        self._level_assign = {
+            'emergency': [],
+            'alert': [],
+            'critical': [],
+            'error': [],
+            'warning': [],
+            'notice': [],
+            'info': [],
+            'debug': [],
+            'progress': []
+        }
         self._level_active = {
             'emergency': True,
             'alert': True,
@@ -16,137 +26,127 @@ class LogEnv:
             'progress': True
         }
 
-    def _assign_loggerToLevel(self, level, **loggers):
-        pass
+    def _assign_logger_to_level(self, level, logger):
+        if logger in self._level_assign[level]:
+            raise Exception(
+                'Logger {logger_name} is already registered for the {level} level'.format(logger_name=logger.get_name(),
+                                                                                          level=level))
+        else:
+            self._level_assign[level].append(logger)
 
-    def assign_to_emergency(self, **loggers):
-        pass
+    def assign_to_emergency(self, logger):
+        self._assign_logger_to_level('emergency', logger)
 
-    def assign_to_emergency(self, **loggers):
-        pass
+    def assign_to_alert(self, logger):
+        self._assign_logger_to_level('alert', logger)
 
-    def assign_to_alert(self, **loggers):
-        pass
+    def assign_to_critical(self, logger):
+        self._assign_logger_to_level('critical', logger)
 
-    def assign_to_critical(self, **loggers):
-        pass
+    def assign_to_error(self, logger):
+        self._assign_logger_to_level('error', logger)
 
-    def assign_to_error(self, **loggers):
-        pass
+    def assign_to_warning(self, logger):
+        self._assign_logger_to_level('warning', logger)
 
-    def assign_to_warning(self, **loggers):
-        pass
+    def assign_to_notice(self, logger):
+        self._assign_logger_to_level('notice', logger)
 
-    def assign_to_notice(self, **loggers):
-        pass
+    def assign_to_info(self, logger):
+        self._assign_logger_to_level('info', logger)
 
-    def assign_to_info(self, **loggers):
-        pass
+    def assign_to_debug(self, logger):
+        self._assign_logger_to_level('debug', logger)
 
-    def assign_to_debug(self, **loggers):
-        pass
+    def assign_to_progress(self, logger):
+        self._assign_logger_to_level('progress', logger)
 
-    def assign_to_progress(self, **loggers):
-        pass
-
-    def get_messenger(self, name='unamed_messenger'):
-        pass
-
-    def _is_mode(self):
-        pass
-
-    def is_emergency(self):
-        pass
+    def _is_mode(self, level):
+        return self._level_active[level]
 
     def is_emergency(self):
-        pass
+        return self._level_active['emergency']
 
     def is_alert(self):
-        pass
+        return self._level_active['alert']
 
     def is_critical(self):
-        pass
+        return self._level_active['critical']
 
     def is_error(self):
-        pass
+        return self._level_active['error']
 
     def is_warning(self):
-        pass
+        return self._level_active['warning']
 
     def is_notice(self):
-        pass
+        return self._level_active['notice']
 
     def is_info(self):
-        pass
+        return self._level_active['info']
 
     def is_debug(self):
-        pass
+        return self._level_active['debug']
 
     def is_progress(self):
-        pass
+        return self._level_active['progress']
 
     def _get_logger_assigned_to(self, level):
-        pass
+        return self._level_assign[level]
 
     def get_logger_to_emergency(self):
-        pass
+        return self._level_assign['emergency']
 
     def get_logger_to_alert(self):
-        pass
+        return self._level_assign['alert']
 
     def get_logger_to_critical(self):
-        pass
+        return self._level_assign['critical']
 
     def get_logger_to_error(self):
-        pass
+        return self._level_assign['error']
 
     def get_logger_to_warning(self):
-        pass
+        return self._level_assign['warning']
 
     def get_logger_to_notice(self):
-        pass
+        return self._level_assign['notice']
 
     def get_logger_to_info(self):
-        pass
+        return self._level_assign['info']
 
     def get_logger_to_debug(self):
-        pass
+        return self._level_assign['debug']
 
     def get_logger_to_progress(self):
-        pass
+        return self._level_assign['progress']
 
-    def _toggle_level_active(self, toggle):
-        pass
+    def _toggle_level_active(self, level, toggle):
+        self._level_active[level] = toggle
 
-    def toggle_emergency(self):
-        pass
+    def toggle_emergency(self, toggle):
+        self._toggle_level_active('emergency', toggle)
 
-    def toggle_emergency(self):
-        pass
+    def toggle_alert(self, toggle):
+        self._toggle_level_active('alert', toggle)
 
-    def toggle_alert(self):
-        pass
+    def toggle_critical(self, toggle):
+        self._toggle_level_active('critical', toggle)
 
-    def toggle_critical(self):
-        pass
+    def toggle_error(self, toggle):
+        self._toggle_level_active('error', toggle)
 
-    def toggle_error(self):
-        pass
+    def toggle_warning(self, toggle):
+        self._toggle_level_active('warning', toggle)
 
-    def toggle_warning(self):
-        pass
+    def toggle_notice(self, toggle):
+        self._toggle_level_active('notice', toggle)
 
-    def toggle_notice(self):
-        pass
+    def toggle_info(self, toggle):
+        self._toggle_level_active('info', toggle)
 
-    def toggle_info(self):
-        pass
+    def toggle_debug(self, toggle):
+        self._toggle_level_active('debug', toggle)
 
-    def toggle_debug(self):
-        pass
-
-    def toggle_progress(self):
-        pass
-
-
-
+    def toggle_progress(self, toggle):
+        self._toggle_level_active('progress', toggle)

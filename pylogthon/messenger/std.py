@@ -1,12 +1,16 @@
-'''
-Mensageiro padrão.
-'''
+""" Mensageiro padrão.
+"""
+
 
 class Std:
-    def __init__(self, name):
+    def __init__(self, environment, name='unamed_messenger'):
         self._name = name
+        self._environment = environment
 
     def get_name(self):
+        return self._name
+
+    def _send(self, level, message, context={}):
         pass
 
     def emergency(self, message, context={}):
